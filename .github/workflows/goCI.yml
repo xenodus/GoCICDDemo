@@ -35,5 +35,5 @@ jobs: #jobs to execute on event
         
     - name: Perform Go Test
       run: |
-        go mod init
+        go mod init `pwd` 
         go test -cover -v
