@@ -108,7 +108,7 @@ jobs: #jobs to execute on event
         message-title: New Commit Pushed
         webhook: ${{ secrets.DISCORD_WEBHOOK }}
 
-    - name: Send mails
+    - name: Notify via emails
       uses: dawidd6/action-send-mail@v3
       with:
         # Required mail server address:
