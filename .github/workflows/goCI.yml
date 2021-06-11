@@ -66,5 +66,5 @@ jobs: #jobs to execute on event
         title: Build Failed
         token: ${{secrets.GITHUB_TOKEN}}
         assignees: ${{github.actor}}
-        labels: worflow-failed
+        labels: workflow-failed
         body: Workflow failed for commit ${{github.sha}}      
