@@ -34,10 +34,15 @@ jobs:
           status: ${{ job.status }} # do not modify this line     
 
       - name: Notify on Discord
-        uses: fateyan/action-discord-notifier@v1
-        with:
-          message-title: New Version Released
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: LeGitHubDeTai/github-to-discord@main
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: Commit Bot
+          DISCORD_AVATAR: https://raw.githubusercontent.com/LeGitHubDeTai/github-to-discord/main/icon.png
+          MESSAGE_TITLE: New Version
+          MESSAGE_DESCRIPTION: Github Action By Tai Studio
+          MESSAGE_URL: https://github.com/xenodus/GoCICDDemo/tags
+          MESSAGE_COLOR: 5814783          
 
       - name: Notify via emails
         uses: dawidd6/action-send-mail@v3
