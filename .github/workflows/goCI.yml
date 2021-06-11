@@ -6,7 +6,7 @@ on: #on event
 jobs: #jobs to execute on event
   my-ci-job-1:
     name: My CI Job
-    runs-on: ubuntu-latest # OS in VM
+    runs-on: ubuntu-18.04 # OS in VM
     steps:
     - name: Print a greeting
       run: |
