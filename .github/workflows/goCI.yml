@@ -44,3 +44,10 @@ jobs: #jobs to execute on event
       run: |
         ls -la remoteRepo
         cat remoteRepo/myText.txt
+        
+    - name: Install dependencies for Go
+      run: |
+        go get github.com/franela/goblin # Adds package for Goblin testing
+        go get github.com/tebeka/go2xunit # Adds package for conversion
+        go install
+        go test -v
