@@ -13,6 +13,10 @@ jobs: #jobs to execute on event
         ls
         echo Hello there! # run terminal command
         
+    # Test cURL
+    - name: My cURL request 
+      run: curl https://kwehbot.xyz/api/stats         
+        
     - name: Setup Go environment
       uses: actions/setup-go@v2.1.3
       with:
@@ -20,10 +24,7 @@ jobs: #jobs to execute on event
         go-version: 1.16.5
         
     - name: Show Go version # verify that go is installed
-      run: go version # show go version
-      
-    - name: My cURL request 
-      run: curl https://kwehbot.xyz/api/stats 
+      run: go version # show go version    
       
     - name: Checkout code # bring repo code to vm
       uses: actions/checkout@v2     
@@ -58,33 +59,30 @@ jobs: #jobs to execute on event
       if: always() # always do it
       with:
         files: report.xml # make use of a file we created
-        
-    - name: Notify on Telegram
-      uses: yanzay/notify-telegram@v0.1.0
-      if: always()
-      with:
-        chat: ${{ secrets.TELEGRAM_USER_ID }} # user id or channel name secret
-        token: ${{ secrets.TELEGRAM_TOKEN }} # token secret
-        status: ${{ job.status }} # do not modify this line
-        
+
+    # Report.xml asset
     - if: ${{ success() }}        
       name: Create upload directory
       run: mkdir upload
-      
-    - name: Prepare documents
+
+    - if: ${{ success() }}      
+      name: Prepare documents
       run: mv report.xml ./upload
       
-    - name: Prepare artifacts
+    - if: ${{ success() }}    
+      name: Prepare artifacts
       uses: actions/upload-artifact@v2
       with:
         name: assetDocument
         path: upload
         
-    - name: Download Content
+    - if: ${{ success() }} 
+      name: Download Content
       uses: actions/download-artifact@v2
       with:
         name: assetDocument
-        
+    
+    # Issue Creation
     - if: ${{ failure() }}
       name: Create issues notifications
       uses: nashmaniac/create-issue-action@v1.1
@@ -94,3 +92,12 @@ jobs: #jobs to execute on event
         assignees: ${{github.actor}}
         labels: workflow-failed
         body: Workflow failed for commit ${{github.sha}}
+        
+    # Social Media Notifications
+    - name: Notify on Telegram
+      uses: yanzay/notify-telegram@v0.1.0
+      if: always()
+      with:
+        chat: ${{ secrets.TELEGRAM_USER_ID }} # user id or channel name secret
+        token: ${{ secrets.TELEGRAM_TOKEN }} # token secret
+        status: ${{ job.status }} # do not modify this line        
