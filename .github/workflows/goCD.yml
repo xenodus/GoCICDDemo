@@ -2,7 +2,7 @@ name: Release of Go code
 on:
   create:
     tags:
-     - v* # test single space
+      - v*
 
 jobs:
   release:
