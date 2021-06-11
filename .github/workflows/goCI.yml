@@ -34,4 +34,6 @@ jobs: #jobs to execute on event
         cat calc.go # print the content of calc.go
         
     - name: Perform Go Test
-      run: go test -cover -v
+      run: |
+        go mod init
+        go test -cover -v
