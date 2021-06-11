@@ -9,11 +9,7 @@ jobs: #jobs to execute on event
     runs-on: ubuntu-18.04 # OS in VM
     steps:
     - name: Print a greeting
-      run: echo Hello there! # run terminal command
-        
-    # Test cURL
-    - name: My cURL request 
-      run: curl https://kwehbot.xyz/api/stats         
+      run: echo Hello there! # run terminal command         
         
     - name: Setup Go environment
       uses: actions/setup-go@v2.1.3
@@ -90,7 +86,11 @@ jobs: #jobs to execute on event
         assignees: ${{github.actor}}
         labels: workflow-failed
         body: Workflow failed for commit ${{github.sha}}
-        
+
+    # Perform cURL
+    - name: My cURL request 
+      run: curl https://kwehbot.xyz/api/stats      
+
     # Notifications
     - name: Notify on Telegram
       uses: yanzay/notify-telegram@v0.1.0
