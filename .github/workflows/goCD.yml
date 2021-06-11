@@ -23,3 +23,42 @@ jobs:
           args: release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # Notifications
+      - name: Notify on Telegram
+        uses: yanzay/notify-telegram@v0.1.0
+        if: always()
+        with:
+          chat: ${{ secrets.TELEGRAM_USER_ID }} # user id or channel name secret
+          token: ${{ secrets.TELEGRAM_TOKEN }} # token secret
+          status: ${{ job.status }} # do not modify this line     
+
+      - name: Notify on Discord
+        uses: fateyan/action-discord-notifier@v1
+        with:
+          message-title: New Version Released
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Notify via emails
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Required mail server address:
+          server_address: smtp.zoho.com
+          # Required mail server port:
+          server_port: 465
+          # Required mail server username:
+          username: ${{secrets.MAIL_USERNAME}}
+          # Required mail server password:
+          password: ${{secrets.MAIL_PASSWORD}}
+          # Required mail subject:
+          subject: Github Actions job result
+          # Required recipients' addresses:
+          to: contact@alvinyeoh.com,xenodus@gmail.com
+          # Required sender full name (address can be skipped):
+          from: Alvin Yeoh # <user@example.com>
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional plain body:
+          body: New version of ${{github.repository}} released!
+          # Optional recipient of the email response:
+          reply_to: contact@alvinyeoh.com          
