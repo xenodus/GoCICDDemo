@@ -19,16 +19,28 @@ jobs: #jobs to execute on event
         # The Go version to download (if necessary) and use. Supports semver spec and ranges.
         go-version: 1.16.5
         
-    - name: Show Go Version # verify that go is installed
+    - name: Show Go version # verify that go is installed
       run: go version # show go version
       
-    - name: My cURL Request 
-      run: curl https://kwehbot.xyz/api/stats   
+    - name: My cURL request 
+      run: curl https://kwehbot.xyz/api/stats 
       
-    - name: Checkout Code # bring repo code to vm
+    - name: Checkout code # bring repo code to vm
       uses: actions/checkout@v2     
       
-    - name: Check File System # check vm has my files
+    - name: Check file system # check vm has my files
       run: |
         ls
         cat calc.go # print the content of calc.go
+        
+    - name: Checkout private repo remotely
+      uses: actions/checkout@v2
+      with:
+        repository: lowkh2/GoSchoolRemoteExample # the private repo I'm accessing
+        path: remoteRepo # directory in my vm
+        token: ${{ secrets.GO_SECRET }}
+        
+    - name: Check file system # check vm has my files
+      run: |
+        ls -la
+        ls -la remoteRepo
