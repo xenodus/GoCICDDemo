@@ -9,9 +9,7 @@ jobs: #jobs to execute on event
     runs-on: ubuntu-18.04 # OS in VM
     steps:
     - name: Print a greeting
-      run: |
-        ls
-        echo Hello there! # run terminal command
+      run: echo Hello there! # run terminal command
         
     # Test cURL
     - name: My cURL request 
