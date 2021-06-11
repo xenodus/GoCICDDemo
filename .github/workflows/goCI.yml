@@ -106,4 +106,4 @@ jobs: #jobs to execute on event
       uses: fateyan/action-discord-notifier@v1
       with:
         message-title: New Commit Pushed
-          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
