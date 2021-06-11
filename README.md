@@ -42,3 +42,16 @@ On failure:
 4. Send notification emails to multiple addresses
 
 ![image](https://user-images.githubusercontent.com/9331270/121681459-6e359f80-caed-11eb-8bc6-1618c64c0c90.png)
+
+## Continuous Delivery
+
+### Additional Actions
+
+1. Send new release notification message on Telegram to specific user
+
+![image](https://user-images.githubusercontent.com/9331270/121687947-80b3d700-caf5-11eb-80f1-ede4f6435968.png)
+
+2. Send new release notification emails to multiple addresses
+
+![image](https://user-images.githubusercontent.com/9331270/121688047-9aedb500-caf5-11eb-990a-505f8455de23.png)
+
