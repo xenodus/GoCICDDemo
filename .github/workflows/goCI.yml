@@ -40,7 +40,8 @@ jobs: #jobs to execute on event
         path: remoteRepo # directory in my vm
         token: ${{ secrets.GO_SECRET }}
         
-    - name: Check file system # check vm has my files
+    - name: Check file system and print file content # check vm has my files
       run: |
         ls -la
         ls -la remoteRepo
+        cat remoteRepo/myText.txt
