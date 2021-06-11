@@ -49,7 +49,7 @@ jobs: #jobs to execute on event
       run: |
         go get github.com/tebeka/go2xunit # Adds package for conversion
         go install
-        go test -v # Command to run go test
+        # go test -v # Command to run go test
         go test -v | go2xunit > report.xml # run test againa nd output as report.xml
         ls
         
