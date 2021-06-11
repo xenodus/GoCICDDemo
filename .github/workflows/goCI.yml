@@ -42,6 +42,5 @@ jobs: #jobs to execute on event
         
     - name: Check file system and print file content # check vm has my files
       run: |
-        ls -la
         ls -la remoteRepo
         cat remoteRepo/myText.txt
