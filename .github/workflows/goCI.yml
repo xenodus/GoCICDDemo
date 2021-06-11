@@ -32,8 +32,3 @@ jobs: #jobs to execute on event
       run: |
         ls
         cat calc.go # print the content of calc.go
-        
-    - name: Perform Go Test
-      run: |
-        go mod init `pwd` 
-        go test -cover -v
