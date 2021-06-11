@@ -47,7 +47,9 @@ jobs: #jobs to execute on event
         
     - name: Install dependencies for Go
       run: |
-        go get github.com/franela/goblin # Adds package for Goblin testing
         go get github.com/tebeka/go2xunit # Adds package for conversion
         go install
-        go test -v
+        go test -v # Command to run go test
+        go test -v | go2xunit > report.xml # run test againa nd output as report.xml
+        ls
+        cat report.xml
