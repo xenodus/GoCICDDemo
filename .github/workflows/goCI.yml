@@ -21,3 +21,6 @@ jobs: #jobs to execute on event
         
     - name: Show Go Version # verify that go is installed
       run: go version # show go version
+      
+    - name: My cURL Request 
+      run: curl https://kwehbot.xyz/api/stats   
