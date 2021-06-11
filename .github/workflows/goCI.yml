@@ -24,3 +24,11 @@ jobs: #jobs to execute on event
       
     - name: My cURL Request 
       run: curl https://kwehbot.xyz/api/stats   
+      
+    - name: Checkout Code # bring repo code to vm
+      run: actions/checkout@v2     
+      
+    - name: Check File System # check vm has my files
+      run: |
+        ls
+        cat calc.go # print the content of calc.go
