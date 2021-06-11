@@ -53,8 +53,18 @@ jobs: #jobs to execute on event
         go test -v | go2xunit > report.xml # run test againa nd output as report.xml
         ls
         
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1 # Checkout Unit Test Reporting app
+    - name: Publish unit test results
+      uses: EnricoMi/publish-unit-test-result-action@v1.17 # Checkout Unit Test Reporting app
       if: always() # always do it
       with:
         files: report.xml # make use of a file we created
+        
+    - if: ${{ failure() }}
+      name: Create issues notifications
+      uses: nashmaniac/create-issue-action@v1.1
+      with:
+        title: Build Failed
+        token: ${{secrets.GITHUB_TOKEN}}
+        assignees: ${{github.actor}}
+        labels: worflow-failed
+        body: Workflow failed for commit ${{github.sha}}      
