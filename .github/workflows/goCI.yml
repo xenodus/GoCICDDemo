@@ -59,7 +59,8 @@ jobs: #jobs to execute on event
       with:
         files: report.xml # make use of a file we created
         
-    - uses: yanzay/notify-telegram@v0.1.0
+    - name: Notify on Telegram
+      uses: yanzay/notify-telegram@v0.1.0
       if: always()
       with:
         chat: ${{ secrets.TELEGRAM_USER_ID }} # user id or channel name secret
