@@ -51,13 +51,31 @@ jobs: #jobs to execute on event
         go install
         go test -v # Command to run go test
         go test -v | go2xunit > report.xml # run test again and output as report.xml
-        ls
+        ls      
         
     - name: Publish unit test results
       uses: EnricoMi/publish-unit-test-result-action@v1.17 # Checkout Unit Test Reporting app
       if: always() # always do it
       with:
         files: report.xml # make use of a file we created
+        
+    - if: ${{ success() }}        
+      name: Create upload directory
+      run: mkdir upload
+      
+    - name: Prepare documents
+      run: mv report.xml ./upload
+      
+    - name: Prepare artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: assetDocument
+        path: upload
+        
+    - name: Download Content
+      uses: actions/download-artifact@v2
+      with:
+        name: assetDocument
         
     - if: ${{ failure() }}
       name: Create issues notifications
@@ -67,4 +85,4 @@ jobs: #jobs to execute on event
         token: ${{secrets.GITHUB_TOKEN}}
         assignees: ${{github.actor}}
         labels: workflow-failed
-        body: Workflow failed for commit ${{github.sha}}      
+        body: Workflow failed for commit ${{github.sha}}
